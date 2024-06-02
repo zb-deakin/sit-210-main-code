@@ -1,0 +1,38 @@
+/* customised bootstrap theme */
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+
+/* customise Bootstrap */
+$border-radius: 1rem;
+$border-radius-sm: 0.75rem;
+$border-radius-lg: 1rem;
+$border-radius-pill: 50rem;
+@each $color, $value in $theme-colors {
+    .btn-#{$color} {
+        @if $color == "light" {
+            @include button-variant(
+                    $value,
+                    $value,
+                $hover-background: shade-color($value, $btn-hover-bg-shade-amount),
+                $hover-border: shade-color($value, $btn-hover-border-shade-amount),
+                $active-background: shade-color($value, $btn-active-bg-shade-amount),
+                $active-border: shade-color($value, $btn-active-border-shade-amount)
+            );
+        } @else if $color == "dark" {
+            @include button-variant(
+                    $value,
+                    $value,
+                $hover-background: tint-color($value, $btn-hover-bg-tint-amount),
+                $hover-border: tint-color($value, $btn-hover-border-tint-amount),
+                $active-background: tint-color($value, $btn-active-bg-tint-amount),
+                $active-border: tint-color($value, $btn-active-border-tint-amount)
+            );
+        } @else {
+            @include button-variant($value, $value);
+        }
+    }
+}
+
+/* add changes bootstrap into Bootstrap theme */
+@import 'bootstrap/scss/bootstrap';
